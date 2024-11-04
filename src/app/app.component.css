@@ -1,0 +1,156 @@
+
+
+.form-container {
+    width: 487px;
+    padding: 60px 25px 25px 25px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-family: Inter;
+}
+
+.label-header {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 16.94px;
+    text-align: left;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    height: 73px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 8px;
+}
+.input-group:focus-within{
+    outline: 2px solid black;
+}
+
+.input-group input {
+    height: 80%;
+    width: 70%;
+    padding: 8px;
+    font-size: 22px;
+    border: none;
+    outline: none;
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.currency-select {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    height: 80%;
+}
+
+.flag-icon {
+    width: 22px;
+    margin-right: 5px;
+}
+
+.currency-select select {
+    border: none;
+    background: none;
+    font-size: 22px;
+    padding-right: 10px;
+    outline: none;
+}
+
+.fees {
+    display: block;
+    margin: 16px 0 24px 0;
+    padding: 16px 16px 0 16px;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.fees .bold{
+    font-weight: bold;
+}
+
+.fees div{
+    margin: 0 0 16px 0;
+}
+
+.fees div span:last-child{
+    float: right;
+}
+
+
+hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 15px 0;
+}
+
+.exchange {
+    display: block;
+    margin: 16px 0 24px 0;
+    padding: 16px 16px 0 16px;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.exchange .bold{
+    font-weight: bold;
+}
+
+.exchange div:first-child span:last-child{
+    float: right;
+}
+
+.exchange div .small{
+    font-size: 11px;
+}
+
+
+.arrival-time {
+    font-size: 14px;
+    margin-top: 15px;
+    color: #333;
+}
+
+.container-button {
+
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 60px;
+}
+
+.container-button button {
+    width: 206px;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 30px;
+}
+
+.container-button button:hover {
+    background-color: #43a047;
+}
+
+.powered-by {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #1c29c2;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.powered-by img {
+    width: 100px;
+}
