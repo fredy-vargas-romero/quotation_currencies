@@ -1,12 +1,10 @@
-
-
 .form-container {
     width: 487px;
     padding: 60px 25px 25px 25px;
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    font-family: Inter;
+    font-family: sans-serif;
 }
 
 .form-container .error{
@@ -37,33 +35,6 @@
     visibility: hidden;
 }
 
-/* .form-container form.hidden{
-
-    background: linear-gradient(130deg, #ff7e00, #ffffff, #5cff00);
-    background-size: 200% 200%;
-
-    -webkit-animation: Animation 5s ease infinite;
-    -moz-animation: Animation 5s ease infinite;
-    animation: Animation 5s ease infinite;
-}  */
-
-
-/* @-webkit-keyframes Animation {
-    0%{background-position:10% 0%}
-    50%{background-position:91% 100%}
-    100%{background-position:10% 0%}
-}
-@-moz-keyframes Animation {
-    0%{background-position:10% 0%}
-    50%{background-position:91% 100%}
-    100%{background-position:10% 0%}
-}
-@keyframes Animation { 
-    0%{background-position:10% 0%}
-    50%{background-position:91% 100%}
-    100%{background-position:10% 0%}
-} */
-
 .form-container .container-form-loader{
     height: 535px;
     display: flex;
@@ -93,7 +64,6 @@
 
 
 .label-header {
-    font-family: Inter;
     font-size: 14px;
     font-weight: 300;
     line-height: 16.94px;

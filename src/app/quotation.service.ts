@@ -3,16 +3,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { lastValueFrom, Observable, of } from "rxjs"
 import { Quotation } from './quotation.interface';
 import { iCredencial } from './credentials.interface';
+import { ModuleConfigService } from './module-config.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ExchangeService {
+export class QuotationService {
     balamApiUrl:string='';
     headers = new HttpHeaders();
     quotation = {} as Quotation;
     
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private moduleConfig: ModuleConfigService ) { }
 
     init(): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -34,7 +35,7 @@ export class ExchangeService {
     }
 
     private getApiCredencials(): Observable<any> {
-        let urlApi = 'https://us-east1-superb-cubist-440816-v8.cloudfunctions.net/function-get-balam-credentials';
+        let urlApi = this.moduleConfig.urlApiCredencials;
         return this.http.get(urlApi);
     }
 
@@ -43,9 +44,10 @@ export class ExchangeService {
     }
 
     saveQuotationLocally(quotation: any) {
+        let timeoutQuotation = this.moduleConfig.timeoutQuotationMinutes;
         let quotationSessionObject = {
             quotation: quotation,
-            timeout: Date.now() + (10 * 60 * 1000)
+            timeout: Date.now() + (timeoutQuotation * 60 * 1000)
         }
         let keySessionObject = "quotation-" + quotation['base_currency'] + "-" + quotation['quote_currency'];
         sessionStorage.setItem(keySessionObject, btoa(JSON.stringify(quotationSessionObject)));

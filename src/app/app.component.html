@@ -14,9 +14,14 @@
         formControlName="base_amount">
 
       <div class="currency-select">
-        <img src="images/us-flag.png" alt="USD Flag" class="flag-icon">
-        <select name="base_currency" formControlName="base_currency">
-          <option value="USD" selected>USD</option>
+        <img [src]="baseCurrencySelected.flagUrl" alt="quotation currency flag" class="flag-icon" >
+        <select formControlName="base_currency" name="base_currency">
+          <option 
+            *ngFor="let item of currenciesAvailable.base | keyvalue" 
+            value="{{item.value.currency}}" 
+            [selected]="item.value.currency==baseCurrencySelected.currency"
+          >{{item.value.currency}}
+          </option>
         </select>
       </div>
     </div>
@@ -51,10 +56,14 @@
       <input type="number" id="amount-receive" min="1" value="{{quotation1.quote_amount}}" step="any" name="quote_amount"
       readonly>
       <div class="currency-select">
-        <img src="images/col-flag.png" alt="quotation currency flag" class="flag-icon" >
-        <select formControlName="quote_currency" >
-          <option value="MXN" selected>MXN</option>
-          <option value="COP">COL</option>
+        <img [src]="quoteCurrencySelected.flagUrl" alt="quotation currency flag" class="flag-icon" >
+        <select formControlName="quote_currency" name="quote_currency" >
+          <option 
+            *ngFor="let item of currenciesAvailable.quote | keyvalue" 
+            value="{{item.value.currency}}" 
+            [selected]="item.value.currency==quoteCurrencySelected.currency"
+          >{{item.value.currency}}
+          </option>
         </select>
       </div>
     </div>
