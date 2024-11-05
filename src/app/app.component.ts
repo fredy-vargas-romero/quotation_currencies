@@ -1,31 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ExchangeService } from './exchange.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-export interface Quotation {
-  quote_id: string,
-  base_currency: string,
-  quote_currency: string,
-  base_amount: number,
-  quote_amount: number,
-  rate: number,
-  balam_rate: number,
-  fixed_fee: number,
-  pct_fee: number,
-  status: string,
-  expiration_ts: string
-}
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Quotation } from './quotation.interface';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     ExchangeService
@@ -33,43 +21,67 @@ export interface Quotation {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'quotation-front-end';
-  quotation = {
-    "currencyValueFrom": 3232,
-    "currencySelectedFrom": "USD",
-    "currencyValueTo": 3232,
-    "currencySelectedTo": "COL"
-  }
+export class AppComponent implements OnInit {
+  quotationForm;
+  showLoader = false;
+  showFormLoader = false;
 
-  quotation1: Quotation = {
-    base_currency: 'USD',
-    base_amount: 10,
-    quote_currency: 'COP'
-  } as Quotation;
-
-  private quotationSubcription!: Subscription;
   constructor(private exchangeService: ExchangeService) {
+    this.quotationForm = new FormGroup({
+      base_amount: new FormControl(3, [Validators.required, Validators.min(3), Validators.max(999)]),
+      base_currency: new FormControl('USD'),
+      quote_currency: new FormControl('COP', [Validators.required]),
+    })
+
+    this.showFormLoader = true;
   }
 
-  ngOnInit(): void {
-    this.exchangeService.getQuotation(this.quotation1.base_currency,
-      this.quotation1.base_amount,
-      this.quotation1.quote_currency).subscribe((data: any) => {
-        console.log("data: ", data['data'])
-        this.quotation1 = data['data'];
+  quotation1: Quotation = {} as Quotation;
+
+  loadQuotation() {
+    if (!this.quotationForm.valid) {
+      return;
+    }
+
+    let base_currency = this.quotationForm.get("base_currency")?.value!;
+    let base_amount = this.quotationForm.get("base_amount")?.value!;
+    let quote_currency = this.quotationForm.get("quote_currency")?.value!;
+
+    
+    this.showLoader = true;
+
+    this.exchangeService.getQuotation(
+      base_currency,
+      base_amount,
+      quote_currency).then((data: any) => {
+        console.log("call API");
+        console.log("data: ", data)
+        this.quotation1 = data;
+        this.showLoader = false;
+        this.showFormLoader = false;
+      }).catch((error)=>{
+        console.log(error)
       });
-
-    // this.quotationSubcription = this.exchangeService.quotationUpdated.subscribe(() => {
-    //   this.quotation = this.exchangeService.getQuotation();
-    // });
   }
 
-  ngOnDestroy(): void {
-    this.quotationSubcription.unsubscribe();
+  async ngOnInit(): Promise<void> {
+    await this.exchangeService.init();
+    
+    this.loadQuotation();
+
+    this.quotationForm.get('base_amount')?.valueChanges.subscribe((data:any) => {
+      if (this.quotationForm.get('base_amount')?.valid) {
+        this.quotationForm.updateValueAndValidity();
+        this.loadQuotation();
+      }
+    })
+
+    this.quotationForm.get('quote_currency')?.valueChanges.subscribe((data) => {
+      this.loadQuotation();
+    })
   }
 
-  onSendExchange(form: NgForm) {
-    console.log(form)
+  onSendExchange() {
+    console.log(this.quotationForm.value)
   }
 }

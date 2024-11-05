@@ -1,18 +1,26 @@
 <div class="form-container">
-  <form autocomplete="off" (ngSubmit)="onSendExchange(f)" #f="ngForm">
-    <label for="amount-send" class="label-header">Tu envías exactamente</label>
+  
+  <div class="container-loader">
+    <div class="loader" [ngClass]="{'hidden': !showLoader}"></div>
+  </div>
 
+  <div class="container-form-loader"  [ngClass]="{'hidden':!showFormLoader}">
+  </div>
+
+  <form autocomplete="off" [formGroup]="quotationForm"  (ngSubmit)="onSendExchange()" [ngClass]="{'hidden': showFormLoader}">
+    <label for="amount-send" class="label-header">Tu envías exactamente</label>
     <div class="input-group">
-      <input type="number" min="1" step="any" id="amount-send" [(ngModel)]="quotation1.base_amount"
-        name="currencyValueFrom" required>
+      <input type="number" min="1" step="any" id="amount-send" 
+        formControlName="base_amount">
 
       <div class="currency-select">
         <img src="images/us-flag.png" alt="USD Flag" class="flag-icon">
-        <select name="currencySelectedFrom" [(ngModel)]="quotation1.base_currency">
+        <select name="base_currency" formControlName="base_currency">
           <option value="USD" selected>USD</option>
         </select>
       </div>
     </div>
+    <span class="error" *ngIf="quotationForm.get('base_amount')?.invalid">Amount must be >=2 and <=999</span>
 
     <div class="fees">
       <div>
@@ -40,11 +48,11 @@
 
     <label for="amount-receive" class="label-header">Recibes exactamente</label>
     <div class="input-group">
-      <input type="number" id="amount-receive" min="1" value="1" step="any" name="currencyValueTo"
-        [(ngModel)]="quotation1.quote_amount" required>
+      <input type="number" id="amount-receive" min="1" value="{{quotation1.quote_amount}}" step="any" name="quote_amount"
+      readonly>
       <div class="currency-select">
-        <img src="images/col-flag.png" alt="quotation currency flag" class="flag-icon">
-        <select name="currencySelectedTo" [(ngModel)]="quotation1.quote_currency">
+        <img src="images/col-flag.png" alt="quotation currency flag" class="flag-icon" >
+        <select formControlName="quote_currency" >
           <option value="MXN" selected>MXN</option>
           <option value="COP">COL</option>
         </select>
@@ -54,7 +62,7 @@
     <p class="arrival-time">Tu dinero llega en <strong>15 minutos</strong></p>
 
     <div class="container-button">
-      <button type="submit">Enviar ahora</button>
+      <button type="submit" [disabled]="quotationForm.invalid">Enviar ahora</button>
     </div>
 
   </form>

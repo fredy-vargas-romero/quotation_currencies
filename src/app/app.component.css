@@ -9,6 +9,89 @@
     font-family: Inter;
 }
 
+.form-container .error{
+    color: red;
+    font-size: 12px;
+}
+
+.form-container .container-loader{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-container .loader{
+    border: 4px solid #f3f3f3; 
+    border-top: 4px solid #1c29c2;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spinner 0.5s linear infinite;
+    
+}
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.form-container .loader.hidden{
+    visibility: hidden;
+}
+
+/* .form-container form.hidden{
+
+    background: linear-gradient(130deg, #ff7e00, #ffffff, #5cff00);
+    background-size: 200% 200%;
+
+    -webkit-animation: Animation 5s ease infinite;
+    -moz-animation: Animation 5s ease infinite;
+    animation: Animation 5s ease infinite;
+}  */
+
+
+/* @-webkit-keyframes Animation {
+    0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+@-moz-keyframes Animation {
+    0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+@keyframes Animation { 
+    0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+} */
+
+.form-container .container-form-loader{
+    height: 535px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    border-radius: 16px;
+    background: linear-gradient(46deg, #e6e5e5, #ffffff);
+    background-size: 200% 200%;
+    animation: Animation 1s ease infinite;
+}
+
+@keyframes Animation { 
+    0%{background-position:0% 10%}
+    50%{background-position:200% 0%}
+    100%{background-position:0% 200%}
+}
+
+.form-container .container-form-loader.hidden{
+    display: none;
+}
+
+.form-container form.hidden{
+    display: none;
+}
+
+
+
 .label-header {
     font-family: Inter;
     font-size: 14px;
@@ -140,6 +223,10 @@ hr {
 
 .container-button button:hover {
     background-color: #43a047;
+}
+
+.container-button button:disabled{
+    background-color: #b3b3b3;
 }
 
 .powered-by {
