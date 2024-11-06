@@ -25,15 +25,15 @@
         </select>
       </div>
     </div>
-    <span class="error" *ngIf="quotationForm.get('base_amount')?.invalid">Amount must be >=2 and <=999</span>
+    <span class="error" *ngIf="quotationForm.get('base_amount')?.invalid">Amount must be >=3 and <=999</span>
 
     <div class="fees">
       <div>
-        <span class="bold">${{quotation1.pct_fee}}</span>
+        <span class="bold">${{quotation.pct_fee}}</span>
         <span class="bold">Percentage quotation fee</span>
       </div>
       <div>
-        <span class="bold">${{quotation1.fixed_fee}}</span>
+        <span class="bold">${{quotation.fixed_fee}}</span>
         <span>Fixed quotation fee</span>
       </div>
     </div>
@@ -42,7 +42,7 @@
 
     <div class="exchange">
       <div>
-        <span class="bold">${{quotation1.balam_rate}} {{quotation1.quote_currency}} = $1 {{quotation1.base_currency}}</span>
+        <span class="bold">${{quotation.balam_rate}} {{quotation.quote_currency}} = $1 {{quotation.base_currency}}</span>
         <span class="bold">Balam Rate</span>
       </div>
       <div>
@@ -53,7 +53,7 @@
 
     <label for="amount-receive" class="label-header">Recibes exactamente</label>
     <div class="input-group">
-      <input type="number" id="amount-receive" min="1" value="{{quotation1.quote_amount}}" step="any" name="quote_amount"
+      <input type="number" id="amount-receive" min="1" value="{{quotation.quote_amount}}" step="any" name="quote_amount"
       readonly>
       <div class="currency-select">
         <img [src]="quoteCurrencySelected.flagUrl" alt="quotation currency flag" class="flag-icon" >

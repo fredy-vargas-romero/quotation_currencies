@@ -1,8 +1,0 @@
-{
-    "/sandbox/*":{
-        "target": "https://api.balampay.com",
-        "secure":false,
-        "logLevel":"debug",
-        "changeOrigin":false
-    }
-}

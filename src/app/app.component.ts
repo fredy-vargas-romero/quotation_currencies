@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   currenciesAvailable;
   baseCurrencySelected;
   quoteCurrencySelected;
-  quotation1: Quotation = {} as Quotation;
+  quotation: Quotation = {} as Quotation;
 
   constructor( private moduleConfig: ModuleConfigService,private quotationService: QuotationService) {
     this.currenciesAvailable = this.moduleConfig.currenciesAvailable;
@@ -64,9 +64,7 @@ export class AppComponent implements OnInit {
       base_currency,
       base_amount,
       quote_currency).then((data: any) => {
-        console.log("call API");
-        console.log("data: ", data)
-        this.quotation1 = data;
+        this.quotation = data;
         this.showLoader = false;
         this.showFormLoader = false;
       }).catch((error) => {
@@ -93,6 +91,6 @@ export class AppComponent implements OnInit {
   }
 
   onSendExchange() {
-    console.log(this.quotationForm.value)
+    console.log("send quotation: ", this.quotation)
   }
 }

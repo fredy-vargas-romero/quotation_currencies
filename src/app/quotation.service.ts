@@ -75,7 +75,6 @@ export class QuotationService {
         this.quotation = this.getQuotationLocally(keySessionObject);
 
         if (this.quotation == null) {
-            console.log("obteniendo data from server")
             try {
                 let result = await lastValueFrom(this.getQuotationFromApi(base_currency, base_amount, quote_currency));
                 this.quotation = result['data'];
