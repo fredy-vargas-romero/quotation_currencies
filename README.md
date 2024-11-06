@@ -21,3 +21,5 @@ This app utilizes the following components:
 - Session Storage: Temporarily caches the fetched exchange rates locally, allowing for efficient currency conversion calculations and reducing redundant API calls. This helps minimize load on the API and improves the app's performance.
 
 
+## Recomendations:
+- Credentials API: Must be configured to restrict access exclusively to the web app by enabling CORS (Cross-Origin Resource Sharing) filters. This additional security measure ensures that only authorized requests from the designated web application are permitted.
